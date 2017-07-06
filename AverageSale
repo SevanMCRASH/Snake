@@ -1,0 +1,38 @@
+def main():
+    weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    sales = []
+
+    for days in weekdays:
+        dailySales = askForSales(days)
+        sales.append(dailySales)
+
+    total, average = totalAndAverage(sales)
+
+    print("Total sales: $", format(total, ".2f"), sep='')
+    print("Average sales: $", format(average, ".2f"), sep='')
+
+def askForSales(weekday):
+    isValid = False
+    try:
+        dailySaleValue = float(input("Please enter sales for " + weekday + ": "))
+        isValid = True
+    except ValueError:
+        isValid = False
+
+    while not isValid or (dailySaleValue < 0):
+        print("Invalid sales value.")
+        try:
+            dailySaleValue = float(input("Please enter sales for " + weekday + ": "))
+            isValid = True
+        except ValueError:
+            isValid = False
+
+    return dailySaleValue
+
+def totalAndAverage(sales):
+    total = 0
+    for number in sales:
+        total += number
+    return total, total/len(sales)#total, average
+
+main()
