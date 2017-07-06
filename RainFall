@@ -1,0 +1,50 @@
+def main():
+    Rain = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    month = []
+    for number in Rain:
+        dailyRain = askForRain(number)
+        month.append(dailyRain)
+
+    total, average, highest, lowest, max, min = totalAndAverage(month, Rain)
+
+    print("Total rainfall: ", format(total, ".2f"), sep='')
+    print("Average rainfall: ", format(average, ".2f"), sep='')
+    print("Minimum rainfall: ", format(lowest, ".2f"), " in the month of ", min, sep='')
+    print("Maximum rainfall: ", format(highest, ".2f"), " in the month of ", max, sep='')
+
+
+def askForRain(Rain):
+    isValid = False
+    try:
+        dailyRain = float(input("Please enter the rainfall for " + Rain + ": "))
+        isValid = True
+    except ValueError:
+        isValid = False
+
+    while not isValid or (dailyRain < 0):
+        print("Invalid rainfall value.")
+        try:
+            dailyRain = float(input("Please enter the rainfall for " + Rain + ": "))
+            isValid = True
+        except ValueError:
+            isValid = False
+
+    return dailyRain
+
+def totalAndAverage(month, Rain):
+    monthmax = Rain[0]
+    monthmin = Rain[0]
+    high = month[0]
+    low = month[0]
+    total = 0
+    for number in range(len(month)):
+        if (high < month[number]):
+            high = month[number]
+            monthmax = Rain[number]
+        if (low > month[number]):
+            low = month[number]
+            monthmin = Rain[number]
+        total += month[number]
+    return total, total/len(month), high, low, monthmax, monthmin#total, average
+
+main()
