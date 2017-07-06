@@ -1,0 +1,9 @@
+def isPrime():
+    number = int(input("Enter a number: \n"))
+    arr = [True] * (number+1)
+    for i in range(2, number + 1):
+        if (arr[i]):
+            print (i, end=' ')
+            for j in range(i, number+1, i):
+                arr[j] = False
+isPrime()
