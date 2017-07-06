@@ -1,0 +1,26 @@
+import os
+def main():
+    flag = True
+    filename = input("Please enter the file name or type QUIT to exit:\n")
+    total = 0
+    while(flag == True):
+        if(filename.lower() == "quit"):
+           flag = False
+        else:
+            if(os.path.exists(filename)):
+                file = open(filename, 'r')
+                line = file.readlines()
+                for number in line:
+                    total += float(number)
+                if total == 0:
+                    print("File",filename,"is empty.")
+                else:
+                    average = total/len(line)
+                    print("Total: %.3f" %total)
+                    print("Average: %.3f" %average)
+                flag = False
+            else:
+                print("File:", filename,"does not exist.")
+                filename = input("Please enter the file name again or type QUIT to exit:\n")
+                flag = True
+main()
